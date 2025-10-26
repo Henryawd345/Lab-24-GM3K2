@@ -4,7 +4,6 @@
 #include <limits> 
 #include <ctime>
 #include <set>
-#include <list>
 #include "Goat.h"
 using namespace std;
 
@@ -154,9 +153,7 @@ void add_goat(set<Goat> &trip,string names[], string colors[], int nNames, int n
     int age = rand() % (MAX_AGE + 1);
 
     Goat g(names[namei], age, colors[colori]);
-    trip.push_back(g);
-
-    trip.sort();
+    trip.insert(g);
 
     cout << "Added: " << g.get_name()
          << " (" << g.get_age() << ", " << g.get_color() << ")\n";
