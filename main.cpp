@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <limits> 
 #include <ctime>
+#include <set>
 #include <list>
 #include "Goat.h"
 using namespace std;
@@ -12,10 +13,10 @@ int N_NAMES = 0;
 int N_COLORS = 0;
 
 
-int select_goat(list<Goat> &trip);
-void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string names[], string colors[], int nNames, int nColors);
-void display_trip(list<Goat> &trip);
+int select_goat(set<Goat> &trip);
+void delete_goat(set<Goat> &trip);
+void add_goat(set<Goat> &trip, string names[], string colors[], int nNames, int nColors);
+void display_trip(set<Goat> &trip);
 int main_menu();
 
 int main() {
@@ -34,7 +35,7 @@ int main() {
     while (N_COLORS < SZ_COLORS && (fin1 >> colors[N_COLORS])) N_COLORS++;
     fin1.close();
 
-    list<Goat> trip;
+    set<Goat> trip;
 
     while (true){
         int choice = main_menu();
@@ -76,7 +77,7 @@ int main_menu() {
     return choice;
 }
 
-void display_trip(list<Goat> &trip){
+void display_trip(set<Goat> &trip){
     cout << "\nCurrent Trip (" << trip.size() << " goat" 
         << (trip.size() == 1 ? "" : "s") << "):\n";
     
@@ -102,7 +103,7 @@ void display_trip(list<Goat> &trip){
     }
 }
 
-int select_goat(list<Goat> &trip) {
+int select_goat(set<Goat> &trip) {
     if (trip.empty()) {
         cout << "\nNo goats to select.\n";
         return -1;
@@ -128,7 +129,7 @@ int select_goat(list<Goat> &trip) {
     return pick;
 }
 
-void delete_goat (list<Goat> &trip){
+void delete_goat (set<Goat> &trip){
     int pick = select_goat(trip);
     if (pick == -1) return;
 
@@ -143,7 +144,7 @@ void delete_goat (list<Goat> &trip){
     }
 }
 
-void add_goat(list<Goat> &trip,string names[], string colors[], int nNames, int nColors) {
+void add_goat(set<Goat> &trip,string names[], string colors[], int nNames, int nColors) {
     if (nNames == 0 || nColors == 0){
         cout << "\n(No names/colors loaded, cannot add.)\n";
         return;
